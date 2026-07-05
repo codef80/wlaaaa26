@@ -1,0 +1,22 @@
+:root {
+  --bg: #0f172a;
+  --fg: #f8fafc;
+  --primary: #6366f1;
+  --card: #1e293b;
+  --muted: #94a3b8;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
