@@ -1,22 +1,254 @@
+/* ============================================
+   خط الهوية — foda (The Year of Handicrafts)
+   للعناوين العربية فقط. الأرقام والإنجليزي بخط النظام النظيف.
+   ============================================ */
+@font-face {
+  font-family: "Foda";
+  src: url("/fonts/foda.woff2") format("woff2"),
+       url("/fonts/foda.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+FB50-FDFF, U+FE70-FEFF;
+}
+
+/* ============================================
+   الهوية البصرية — "قهوة نهارية" (فاتح كريمي/بني)
+   هذه القيم الافتراضية. كل كافيه يعيد تعريفها من إعداداته.
+   ============================================ */
 :root {
-  --bg: #0f172a;
-  --fg: #f8fafc;
-  --primary: #6366f1;
-  --card: #1e293b;
-  --muted: #94a3b8;
+  /* الأسطح */
+  --bg: #f5ede0;          /* خلفية الصفحة — كريمي دافئ */
+  --surface: #faf4e8;     /* الكروت — كريمي أفتح */
+  --surface-2: #ffffff;   /* حقول الإدخال */
+
+  /* النص */
+  --fg: #3d2817;          /* بُن غامق — النص الأساسي */
+  --fg-muted: #a08862;    /* بُني فاتح — نص ثانوي */
+  --fg-soft: #b5a382;     /* أخفت */
+
+  /* الهوية */
+  --primary: #6f4a2a;     /* بُن قهوة — الأزرار والعناصر المهمة */
+  --primary-fg: #faf4e8;  /* النص فوق البُني */
+  --accent: #c08a3e;      /* كراميل نحاسي — التمييز والتقدّم */
+
+  /* الحدود */
+  --border: #e0d3ba;
+  --border-soft: #e8dcc4;
+  --track: #ece0c9;       /* خلفية شريط التقدّم */
+
+  /* الحالات */
+  --success: #4f7a3f;
+  --danger: #a8432e;
+
+  /* الشكل */
+  --radius: 14px;
+  --radius-lg: 22px;
+  --radius-pill: 99px;
+
+  /* الخطوط */
+  --font-display: "Foda", "Segoe UI", Tahoma, sans-serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-html,
-body {
+html, body {
   background: var(--bg);
   color: var(--fg);
-  font-family: system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif;
+  font-family: var(--font-body);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* العناوين العربية بخط الهوية */
+h1, h2, h3, .display { font-family: var(--font-display); font-weight: 400; }
+
+/* الأرقام دايماً tabular عشان ما ترقص */
+.num { font-variant-numeric: tabular-nums; }
+
+/* ============================================
+   عناصر مشتركة — الحقول والأزرار
+   ============================================ */
+.field-label {
+  display: block;
+  font-size: 13px;
+  color: var(--fg-muted);
+  margin: 16px 0 6px;
+}
+.field {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  font-size: 16px;
+  color: var(--fg);
+  background: var(--surface-2);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  outline: none;
+  transition: border-color 0.15s;
+}
+.field:focus { border-color: var(--accent); }
+.field::placeholder { color: var(--fg-soft); }
+
+.btn-primary {
+  width: 100%;
+  height: 50px;
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--primary-fg);
+  background: var(--primary);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+}
+.btn-primary.big { height: 56px; font-size: 17px; }
+.btn-primary:active { transform: scale(0.99); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-secondary {
+  height: 48px;
+  padding: 0 20px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--primary);
+  background: transparent;
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-secondary:active { background: var(--track); }
+
+.btn-ghost {
+  padding: 8px 14px;
+  font-size: 14px;
+  color: var(--fg-muted);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.btn-ghost.full { width: 100%; margin-top: 12px; padding: 12px; }
+
+/* ============================================
+   صفحة تسجيل الدخول
+   ============================================ */
+.login-wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.login-card {
+  width: 100%;
+  max-width: 380px;
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px 36px;
+}
+.login-title { font-size: 28px; margin-bottom: 2px; }
+.login-sub { color: var(--fg-muted); font-size: 14px; }
+.login-error {
+  color: var(--danger);
+  font-size: 13px;
+  margin-top: 14px;
+}
+
+/* ============================================
+   شاشة الكاشير
+   ============================================ */
+.cashier-wrap {
+  min-height: 100vh;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 20px 18px 40px;
+}
+.cashier-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.cashier-cafe { font-size: 24px; }
+.cashier-role { color: var(--fg-muted); font-size: 13px; margin-top: 2px; }
+
+.cashier-card {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22px 20px 26px;
+}
+.phone-row { display: flex; gap: 10px; }
+.phone-row .field { flex: 1; }
+
+.lookup-result { margin-top: 14px; }
+.cust-found {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--track);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+}
+.cust-name { font-weight: 500; font-size: 15px; }
+.cust-balance { color: var(--accent); font-size: 14px; }
+.cust-new {
+  color: var(--fg-muted);
+  font-size: 14px;
+  background: var(--track);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+}
+
+.btn-wa {
+  width: 100%;
+  height: 48px;
+  margin-top: 14px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #128c4b;
+  background: #e6f4ea;
+  border: 0.5px solid #b7dfc4;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.btn-wa:active { background: #d8ecdf; }
+
+.cups-section { margin-top: 6px; }
+.cups-stepper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: var(--surface-2);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px;
+  justify-content: center;
+}
+.step-btn {
+  width: 44px;
+  height: 44px;
+  font-size: 24px;
+  color: var(--primary);
+  background: var(--track);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.step-btn:active { transform: scale(0.95); }
+.cups-value { font-size: 26px; font-weight: 500; min-width: 40px; text-align: center; }
+
+.status-box {
+  margin-top: 18px;
+  padding: 14px 16px;
+  background: #eef6ea;
+  border: 0.5px solid #cfe3c4;
+  border-radius: var(--radius);
+  color: var(--success);
+  font-size: 14px;
+  line-height: 1.7;
 }
